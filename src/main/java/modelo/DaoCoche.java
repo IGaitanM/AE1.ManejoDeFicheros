@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-
 import modelo.entidad.Coche;
 
 
@@ -118,8 +117,31 @@ public class DaoCoche {
 			System.out.println("No hay coches guardados");			
 		}
 	}
-
 	
+	/**
+	 * Metodo que borra un Coche por Id.
+	 * @return el coche borrado
+	 */
+	public void BorrarPorId(int id) {
+		try {
+			for (Coche c : listaCoches) {
+				if (c.getId()==id)
+				listaCoches.remove(id);	
+			}
+			
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("delete -> el id no existe en la BBDD");
+
+		}
+	}
+	
+	/**
+	 * Metodo que consulta un coche por Id.
+	 * @return el coche consultado
+	 */
+	public Coche consultaPorId(int id) {
+		return listaCoches.get(id);
+	}
 	
 }
 

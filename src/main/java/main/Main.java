@@ -50,7 +50,9 @@ try (Scanner sc = new Scanner(System.in)){
 						
 						break;
 					case "2":
-						
+						System.out.println("¿Que ID quieres borrar?");
+						int id = sc.nextInt();
+						daoCoche.BorrarPorId(id);
 						
 						break;
 					case "3":
