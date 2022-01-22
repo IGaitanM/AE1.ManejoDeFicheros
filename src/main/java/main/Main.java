@@ -30,8 +30,9 @@ try (Scanner sc = new Scanner(System.in)){
 									+ "----> 1. Añadir nuevo coche \n" 
 									+ "----> 2. Borrar coche por id. \n" 
 									+ "----> 3. Consultar coche por id. \n" 
-									+ "----> 4. Listado de coches \n" 
-									+ "----> 5. Terminar el programa");
+									+ "----> 4. Listado de coches \n"
+									+ "----> 5. Exportar coches a archivo de texto \n"
+									+ "----> 6. Terminar el programa");
 				
 				opcion = sc.nextLine(); 
 				
@@ -45,7 +46,7 @@ try (Scanner sc = new Scanner(System.in)){
 						System.out.println("Añade el color");
 						coche.setColor(sc.nextLine());
 						daoCoche.addCoche(coche);
-						daoCoche.crearArchivo();
+						
 						
 						break;
 					case "2":
@@ -62,7 +63,11 @@ try (Scanner sc = new Scanner(System.in)){
 						
 						break;
 					case "5":
-
+						daoCoche.crearArchivoTxt();
+						
+						break;
+					case "6":
+						daoCoche.crearArchivoDat();
 						continuar = false;
 						
 						break;	

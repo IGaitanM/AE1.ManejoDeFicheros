@@ -18,7 +18,7 @@ import modelo.entidad.Coche;
 public class DaoCoche {
 	
 	public List<Coche> listaCoches;
-	public int contador = 0;
+	public int contador;
 	public File file;
 	
 	// si el archivo cohes.dat existe llena un arrayList con los datos del mismo al crear un objeto daoCoche
@@ -54,32 +54,55 @@ public class DaoCoche {
 			
 			System.out.println("Array relleno con datos de coches.dat");
 		
-		
 	}
 	
-	public void crearArchivo() {
+	/**
+	 * Metodo que crea o actualiza el archivo coches.dat con los datos del ArrayList listaCoches
+	 */
+	public void crearArchivoDat() {
 		File file = new File("coches.dat");
 		
 		try (FileOutputStream fos = new FileOutputStream(file);
 			 ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			//oos = new ObjectOutputStream(new FileOutputStream(new File(nombreFichero)));
 			oos.writeObject(listaCoches);
-			System.out.println("Objeto introducido");
+			System.out.println("coches guardados en la BBDD");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		
-		System.out.println("Cerrando programa");
 	}
 	
 	/**
-	 * Metodo que introduce un coche de la lista con el id incremental
+	 * Metodo que crea o actualiza el archivo coches.txt con los datos del ArrayList listaCoches
+	 */
+	public void crearArchivoTxt() {
+		File file = new File("coches.txt");
+		
+		try (FileOutputStream fos = new FileOutputStream(file);
+			 ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+			oos.writeObject(listaCoches);
+			System.out.println("coches exportados a archivo de texto");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
+	
+	/**
+	 * Metodo que introduce un coche en listaCoches con el id autoIncremental
 	 * @param c el coche queremos introducir
 	 */
 	
 	public void addCoche(Coche c) {
+		comprobarUltimaId();
 		c.setId(contador++);
 		listaCoches.add(c);
+	}
+	
+	/**
+	 * Metodo para comprobar el último id de listaCoches
+	 */
+	public void comprobarUltimaId() {
+		if (!listaCoches.isEmpty())
+			contador = listaCoches.size();
 	}
 	
 	/**
