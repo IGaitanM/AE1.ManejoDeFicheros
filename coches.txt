@@ -1,4 +1,0 @@
-Coche [id=1, matricula=caca, modelo=caca, color=caaa]
-Coche [id=2, matricula=frtt, modelo=trtrt, color=trtrtr]
-Coche [id=3, matricula=caca, modelo=caca, color=caca]
-Coche [id=4, matricula=cipo, modelo=te, color=ta]

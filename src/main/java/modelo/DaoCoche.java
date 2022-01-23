@@ -17,13 +17,14 @@ import modelo.entidad.Coche;
 
 public class DaoCoche {
 	
+	public static final String NOMBRE_BBDD = "src/main/resources/coches.dat";
 	public List<Coche> listaCoches;
 	public int contador;
 	
 	// si el archivo cohes.dat existe llena un arrayList con los datos del mismo al crear un objeto daoCoche
 	public DaoCoche() {
 		listaCoches = new ArrayList<Coche>();
-		File fn = new File("coches.dat");
+		File fn = new File(NOMBRE_BBDD);
 		if (fn.exists()) {
 			llenarArray();
 			
@@ -35,7 +36,7 @@ public class DaoCoche {
 	
 	public void llenarArray(){
 		
-		File file = new File("coches.dat");
+		File file = new File(NOMBRE_BBDD);
 		try (FileInputStream fis = new FileInputStream(file);
 				 ObjectInputStream ois = new ObjectInputStream(fis);) {
 				
@@ -59,7 +60,7 @@ public class DaoCoche {
 	 * Metodo que crea o actualiza el archivo coches.dat con los datos del ArrayList listaCoches
 	 */
 	public void crearArchivoDat() {
-		File file = new File("coches.dat");
+		File file = new File(NOMBRE_BBDD);
 		
 		try (FileOutputStream fos = new FileOutputStream(file);
 			 ObjectOutputStream oos = new ObjectOutputStream(fos)) {
@@ -74,7 +75,7 @@ public class DaoCoche {
 	 * Metodo que crea el archivo coches.txt con los datos del ArrayList listaCoches
 	 */
 	public void crearArchivoTxt() {
-		try(FileWriter fw = new FileWriter(new File("Coches.txt"));
+		try(FileWriter fw = new FileWriter(new File("src/main/resources/coches.dat"));
 				BufferedWriter bw = new BufferedWriter(fw);) {
 				
 				for(Coche c : listaCoches) {
