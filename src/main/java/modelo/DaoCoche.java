@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-
 import java.util.List;
 
 import modelo.entidad.Coche;
@@ -18,7 +17,6 @@ public class DaoCoche {
 	
 	public List<Coche> listaCoches;
 	public int contador;
-	public File file;
 	
 	// si el archivo cohes.dat existe llena un arrayList con los datos del mismo al crear un objeto daoCoche
 	public DaoCoche() {
@@ -86,22 +84,32 @@ public class DaoCoche {
 	}
 	
 	/**
-	 * Metodo que introduce un coche en listaCoches con el id autoIncremental
+	 * Metodo que introduce un coche en listaCoches con el id autoIncremental a partir del último de la lista.
 	 * @param c el coche queremos introducir
 	 */
 	
 	public void addCoche(Coche c) {
-		comprobarUltimaId();
-		c.setId(contador++);
-		listaCoches.add(c);
+		for (Coche coche : listaCoches) {
+			if (c.getMatricula().equalsIgnoreCase(coche.getMatricula())) {
+				System.out.println("La matrícula ya existe, escribe otra");
+				break;
+			
+			}
+		}
+	
+			comprobarUltimaId();
+			c.setId(++contador);
+			listaCoches.add(c);
+		
 	}
 	
 	/**
 	 * Metodo para comprobar el último id de listaCoches
 	 */
-	public void comprobarUltimaId() {
+	public int comprobarUltimaId() {
 		if (!listaCoches.isEmpty())
-			contador = listaCoches.size();
+			contador = listaCoches.get(listaCoches.size()-1).getId();
+		return contador;
 	}
 	
 	/**
@@ -114,34 +122,38 @@ public class DaoCoche {
 				System.out.println(c);
 			}
 		}else {
-			System.out.println("No hay coches guardados");			
+			System.out.println("No hay coches guardados en la BBDD");			
 		}
 	}
 	
 	/**
-	 * Metodo que borra un Coche por Id.
-	 * @return el coche borrado
+	 * Metodo que borra un Coche por Id e imprime el coche borrado.
 	 */
-	public void BorrarPorId(int id) {
-		try {
-			for (Coche c : listaCoches) {
-				if (c.getId()==id)
-				listaCoches.remove(id);	
+	public boolean BorrarPorId(int id) {
+		for (Coche c : listaCoches) {
+			if (c.getId() == id) {
+				System.out.println("el coche borrado es " + c);
+				return listaCoches.remove(c);
 			}
-			
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println("delete -> el id no existe en la BBDD");
-
 		}
+		System.out.println("el id no existe en la BBDD");
+		return false;
 	}
 	
 	/**
-	 * Metodo que consulta un coche por Id.
-	 * @return el coche consultado
+	 * Metodo que consulta un coche por Id y lo imprime.
 	 */
 	public Coche consultaPorId(int id) {
-		return listaCoches.get(id);
+		for (Coche c : listaCoches) {
+			if (c.getId() == id) {
+				System.out.println("el coche consultado es: " + c);
+				return c;
+			}
+		}
+		System.out.println("el id no existe en la BBDD");
+		return null;
 	}
+	
 	
 }
 

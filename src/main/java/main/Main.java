@@ -14,13 +14,7 @@ public class Main {
 		
 		DaoCoche daoCoche= new DaoCoche();
 
-		
-		
-		
-		
-try (Scanner sc = new Scanner(System.in)){
-			
-			
+		try (Scanner sc = new Scanner(System.in)){
 			boolean continuar = true;
 			String opcion;
 						
@@ -46,36 +40,30 @@ try (Scanner sc = new Scanner(System.in)){
 						System.out.println("Añade el color");
 						coche.setColor(sc.nextLine());
 						daoCoche.addCoche(coche);
-						
-						
-						break;
+						break;		
 					case "2":
 						System.out.println("¿Que ID quieres borrar?");
 						int id = sc.nextInt();
+						sc.nextLine();
 						daoCoche.BorrarPorId(id);
-						
 						break;
 					case "3":
-						
-						
+						System.out.println("¿Que ID quieres consultar?");
+						int id1 = sc.nextInt();
+						sc.nextLine();
+						daoCoche.consultaPorId(id1);
 						break;
-					case "4":
-						
+					case "4":			
 						daoCoche.listarCoches();
-						
 						break;
 					case "5":
 						daoCoche.crearArchivoTxt();
-						
 						break;
 					case "6":
 						daoCoche.crearArchivoDat();
 						continuar = false;
-						
 						break;	
-						
 					default:
-					
 					System.out.println("Elige la opción escribiendo un número del menú, por favor \n");
 				}
 			}	
