@@ -1,9 +1,11 @@
 package modelo;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -69,18 +71,20 @@ public class DaoCoche {
 	}
 	
 	/**
-	 * Metodo que crea o actualiza el archivo coches.txt con los datos del ArrayList listaCoches
+	 * Metodo que crea el archivo coches.txt con los datos del ArrayList listaCoches
 	 */
 	public void crearArchivoTxt() {
-		File file = new File("coches.txt");
-		
-		try (FileOutputStream fos = new FileOutputStream(file);
-			 ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			oos.writeObject(listaCoches);
-			System.out.println("coches exportados a archivo de texto");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 
+		try(FileWriter fw = new FileWriter(new File("Coches.txt"));
+				BufferedWriter bw = new BufferedWriter(fw);) {
+				
+				for(Coche c : listaCoches) {
+					bw.write(c.toString());
+					bw.newLine();
+				}
+				System.out.println("Lista de coches exportada a Coches.txt");
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
 	}
 	
 	/**
