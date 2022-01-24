@@ -32,7 +32,7 @@ public class DaoCoche {
 		
 	}
 	
-	//Método para llenar una arrayList con los datos del archivo coche.dat
+	//MÃ©todo para llenar una arrayList con los datos del archivo coche.dat
 	
 	public void llenarArray(){
 		
@@ -75,7 +75,7 @@ public class DaoCoche {
 	 * Metodo que crea el archivo coches.txt con los datos del ArrayList listaCoches
 	 */
 	public void crearArchivoTxt() {
-		try(FileWriter fw = new FileWriter(new File("src/main/resources/coches.dat"));
+		try(FileWriter fw = new FileWriter(new File("src/main/resources/coches.txt"));
 				BufferedWriter bw = new BufferedWriter(fw);) {
 				
 				for(Coche c : listaCoches) {
@@ -89,14 +89,14 @@ public class DaoCoche {
 	}
 	
 	/**
-	 * Metodo que introduce un coche en listaCoches con el id autoIncremental a partir del último de la lista.
+	 * Metodo que introduce un coche en listaCoches con el id autoIncremental a partir del Ãºltimo de la lista.
 	 * @param c el coche queremos introducir
 	 */
 	
 	public void addCoche(Coche c) {
 		for (Coche coche : listaCoches) {
 			if (c.getMatricula().equalsIgnoreCase(coche.getMatricula())) {
-				System.out.println("La matrícula ya existe, escribe otra");
+				System.out.println("La matrÃ­cula ya existe, escribe otra");
 				break;
 			
 			}
@@ -109,7 +109,7 @@ public class DaoCoche {
 	}
 	
 	/**
-	 * Metodo para comprobar el último id de listaCoches
+	 * Metodo para comprobar el Ãºltimo id de listaCoches
 	 */
 	public int comprobarUltimaId() {
 		if (!listaCoches.isEmpty())
